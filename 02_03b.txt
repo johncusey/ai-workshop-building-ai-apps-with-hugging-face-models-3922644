@@ -1,0 +1,8 @@
+# Please run this in your Google Colab Environment
+
+import requests
+from PIL import Image
+
+image_url = "https://github.com/LinkedInLearning/ai-workshop-building-ai-apps-with-hugging-face-models-3922644/blob/40ea81d22444f26b89330d2567bcc6a3093474fc/city.jpg?raw=true"
+image = Image.open(requests.get(image_url, stream=True).raw)
+image

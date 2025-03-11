@@ -1,0 +1,20 @@
+# Please run this in your Google Colab Environment
+
+import requests
+from PIL import Image
+
+image_url = "https://github.com/LinkedInLearning/ai-workshop-building-ai-apps-with-hugging-face-models-3922644/blob/40ea81d22444f26b89330d2567bcc6a3093474fc/city.jpg?raw=true"
+image = Image.open(requests.get(image_url, stream=True).raw)
+image
+
+!pip install transformers==4.47.0
+
+from transformers import pipeline
+
+pipe = pipeline("image-to-text", model="bczhou/tiny-llava-v1-hf")
+max_new_tokens = 200
+
+prompt = "USER: <image>What are the things that you see in the picture? What stands out to you the most?\nASSISTANT:"
+output = pipe(image, prompt=prompt, generate_kwargs={"max_new_tokens": max_new_tokens})
+
+print(output)

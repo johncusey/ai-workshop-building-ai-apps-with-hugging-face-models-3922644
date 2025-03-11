@@ -1,0 +1,30 @@
+# Please run this in your Google Colab Environment
+
+!pip install llama-cpp-python==0.3.2
+
+from llama_cpp import Llama
+
+llm = Llama.from_pretrained(
+    repo_id="bartowski/aya-23-8B-GGUF",
+    filename="aya-23-8B-IQ2_M.gguf"
+)
+
+reviews = [
+    "This product is amazing! The quality exceeded my expectations, and the customer service was excellent. (English)",  # Positive, highlights quality & service
+    "Este producto es increíble. La entrega fue rápida y el empaque estaba bien protegido. (Spanish)",  # Positive, mentions delivery & packaging
+    "Ce produit est de bonne qualité, mais le prix est un peu trop élevé pour ce qu'il offre. (French)",  # Mixed review, good quality but expensive
+    "Dieses Produkt hat mich enttäuscht. Es funktioniert nicht wie erwartet und der Kundendienst reagiert langsam. (German)",  # Negative, mentions performance & customer service
+    "この製品にはいくつかの良い点がありますが、耐久性に問題があります。数週間で壊れてしまいました。 (Japanese)",  # Negative, durability issue
+]
+
+
+prompt = (
+    "<BOS_TOKEN><|START_OF_TURN_TOKEN|><|SYSTEM_TOKEN|>\n"
+    "Below are multiple customer reviews in different languages. Please analyze them as a whole and provide:\n"
+    "1. A general sentiment analysis of the reviews collectively.\n"
+    "2. A summary of the key strengths customers appreciate.\n"
+    "3. A business weakness that should be improved.\n"
+    "Here are the reviews:\n\n"
+    f"{' '.join(reviews)}\n"
+    "<|END_OF_TURN_TOKEN|>"
+)
