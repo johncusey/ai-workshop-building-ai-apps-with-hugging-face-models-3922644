@@ -35,7 +35,7 @@ response = llm.create_chat_completion (
     ]
 }
 
-print(respone["choice"][0]["message"]["contect"])
+print(response["choices"][0]["message"]["content"])
 
 
 
