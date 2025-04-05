@@ -28,3 +28,23 @@ prompt = (
     f"{' '.join(reviews)}\n"
     "<|END_OF_TURN_TOKEN|>"
 )
+
+response = llm.create_chat_completion (
+    messages=[
+        {"role":"user","content":prompt}
+    ]
+}
+
+print(respone["choice"][0]["message"]["contect"])
+
+
+
+
+
+
+
+
+
+
+
+
